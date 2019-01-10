@@ -1,3 +1,52 @@
 body {
     background-color: #89b3c8;
+    font-family: 'Raleway', sans-serif;
+}
+
+#mainNavbar {
+    font-size: 1.2rem;   
+}
+
+#mainNavbar .nav-link {
+    color: white;
+}
+
+#mainNavbar .nav-link:hover {
+    color: #067870;
+}
+
+#mainNavbar .navbar-brand {
+    color: #067870;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+#headingGroup span {
+    color: #067870;
+}
+
+#headingGroup h1 {
+    font-weight: 100;
+    font-size: 4rem;
+}
+
+.navbar.scrolled {
+    background: #927cb5;
+    transition: background 500ms;
+}
+
+.about {
+    color: white;
+}
+
+.about h2{
+    color: #067870;
+}
+
+.about p{
+    font-weight: 300;
+}
+
+footer {
+    color: #067870;
 }
