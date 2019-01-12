@@ -1,6 +1,7 @@
 body {
     background-color: #89b3c8;
     font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
 }
 
 #mainNavbar {

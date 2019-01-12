@@ -1,3 +1,42 @@
+hideAndShowContent("homepage");
+
+//JSON 
+$.getJSON("Medgadget.json", (data) => {
+    buildContent(data.Medgadget, "#medgadget-wrapper");
+});
+
+$.getJSON("Speckyboy.json", (data) => {
+    buildContent(data.Speckyboy, "#speckyboy-wrapper");
+});
+
+//click handlers
+$("#click-handler-medgadget").click((e) => {
+   hideAndShowContent("medgadget", e); 
+});
+
+$("#click-handler-speckyboy").click((e) => {
+   hideAndShowContent("speckyboy", e); 
+});
+
+//content buidling function for Medgadget & Speckyboy tabs
+function buildContent (data, appendName) {
+    $.each(data, (index, item) => {
+        var contentdiv = $("<div/>").addClass("row align-items-center content").appendTo(appendName);
+        var imgdiv = $("<div/>").addClass("col-md-6").appendTo(contentdiv);
+        var datadiv1 = $("<div/>").addClass("col-md-6 text-center").appendTo(contentdiv);
+        var datadiv2 = $("<div/>").addClass("row justify-content-center").appendTo(datadiv1);
+        var datadiv3 = $("<div/>").addClass("col-10 col-lg-8 about my-5 mb-md-0").appendTo(datadiv2);
+        var img = "<img src='" + item.thumbnail + "' class='img-fluid'>";
+        $(img).appendTo(imgdiv);
+        var title = "<h2>" + item.title + "</h2>";
+        $(title).appendTo(datadiv3);
+        var text = "<p class='lead'>" + item.text + "</p>";
+        $(text).appendTo(datadiv3);
+        var link = "<a href='" + item.articleURL + "'>read more</a>";
+        $(link).appendTo(datadiv3);
+    });
+}
+
 //navbar animation
 $(function () {
     $(document).scroll(function () {
@@ -6,46 +45,21 @@ $(function () {
     });
 });
 
-$("#medgadget-wrapper").children().hide();
-$("#speckyboy-wrapper").children().hide();
-$("#contact-wrapper").children().hide();
-
-$.getJSON("Medgadget.json", (data) => {
-    $.each(data.Medgadget, (index, item) => {
-        var medimg = "<img src='" + item.thumbnail + "'>";
-        $(medimg).appendTo("#medgadget-img");
-        var medtitle = "<h2>" + item.title + "</h2>";
-        $(medtitle).appendTo("#medgadget-data");
-        var medtext = "<p>" + item.text + "</p>";
-        $(medtext).appendTo("#medgadget-data");
-        var medlink = "<a href='" + item.articleURL + "'>read more</a>";
-        $(medlink).appendTo("#medgadget-data");
-    });
-});
-
-$.getJSON("Speckyboy.json", (data) => {
-    $.each(data.Speckyboy, (index, item) => {
-        var speckimg = "<img src='" + item.thumbnail + "'>";
-        $(speckimg).appendTo("#speckyboy-img");
-        var speckytitle = "<h2>" + item.title + "</h2>";
-        $(speckytitle).appendTo("#speckyboy-data");
-        var speckytext = "<p>" + item.text + "</p>";
-        $(speckytext).appendTo("#speckyboy-data");
-        var speckylink = "<a href='" + item.articleURL + "'>read more</a>";
-        $(speckylink).appendTo("#speckyboy-data");
-    });
-});
-
-$("#click-handler-medgadget").click((e) => {
-    e.preventDefault();
-    $("#home-page-wrapper").children().hide();
-    $("#speckyboy-wrapper").children().hide();
-    $("#medgadget-wrapper").children().show();
-});
-
-$("#click-handler-speckyboy").click((e) => {
-    e.preventDefault();
-    $("#home-page-wrapper").children().hide();
-    $("#medgadget-wrapper").children().hide();
-    $("#speckyboy-wrapper").children().show();
-});
+function hideAndShowContent (clickedTab, event = false) {
+    const wrappers = new Map([
+        ["homepage", "#home-page-wrapper"],
+        ["medgadget", "#medgadget-wrapper"],
+        ["speckyboy", "#speckyboy-wrapper"],
+        ["contact", "#contact-wrapper"]
+    ]);
+    if (event){
+        event.preventDefault();
+    }
+    for (var [key, value] of wrappers) {
+        if (key == clickedTab){
+            $(value).show();
+        } else {
+            $(value).hide();
+        }
+    }
+}
