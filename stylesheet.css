@@ -40,12 +40,25 @@ body {
     color: white;
 }
 
-.about h2{
+h2{
     color: #067870;
 }
 
-.about p{
+.about p {
     font-weight: 300;
+}
+
+p + a {
+    color: #067870;
+}
+
+label {
+    color: white;
+}
+
+.btn {
+    background-color: #067870;
+    color: white;
 }
 
 footer {
