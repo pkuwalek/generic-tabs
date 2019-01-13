@@ -1,6 +1,6 @@
 hideAndShowContent("homepage");
 
-//JSON 
+//JSON data downloading
 $.getJSON("Medgadget.json", (data) => {
     buildContent(data.Medgadget, "#medgadget-wrapper");
 });
@@ -9,13 +9,21 @@ $.getJSON("Speckyboy.json", (data) => {
     buildContent(data.Speckyboy, "#speckyboy-wrapper");
 });
 
-//click handlers
+//click handlers for tab changing
+$("#click-handler-home").click((e) => {
+    hideAndShowContent("homepage", e);
+});
+
 $("#click-handler-medgadget").click((e) => {
    hideAndShowContent("medgadget", e); 
 });
 
 $("#click-handler-speckyboy").click((e) => {
    hideAndShowContent("speckyboy", e); 
+});
+
+$("#click-handler-contact").click((e) => {
+    hideAndShowContent("contact", e);
 });
 
 //content buidling function for Medgadget & Speckyboy tabs
@@ -45,6 +53,7 @@ $(function () {
     });
 });
 
+//tab changing logic
 function hideAndShowContent (clickedTab, event = false) {
     const wrappers = new Map([
         ["homepage", "#home-page-wrapper"],
